@@ -1,8 +1,8 @@
 // Import the necessary modules
-import express from 'express';
+import express, { application } from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
-import userRoutes from './routes/user.route.js';
+import { UserRoutes, AuthRoutes } from './routes/routes.js';
 
 // Load environment variables from .env file
 dotenv.config();
@@ -21,6 +21,8 @@ mongoose.connect(process.env.MONGO)
 // Initialize the Express application
 const app = express();
 
+app.use(express.json());
+
 // Start the server and listen on port 3000
 app.listen(3000, () => {
   // Log a success message when the server starts
@@ -28,4 +30,7 @@ app.listen(3000, () => {
 });
 
 // Register the user routes
-app.use('/api/v1/user', userRoutes);
+app.use('/api/v1/user', UserRoutes);
+
+// Register the auth routes
+app.use('/api/v1/auth', AuthRoutes);
