@@ -21,6 +21,7 @@ mongoose.connect(process.env.MONGO)
 // Initialize the Express application
 const app = express();
 
+// Parse JSON request bodies
 app.use(express.json());
 
 // Start the server and listen on port 3000
@@ -34,3 +35,18 @@ app.use('/api/v1/user', UserRoutes);
 
 // Register the auth routes
 app.use('/api/v1/auth', AuthRoutes);
+
+// Define an error handling middleware
+app.use((err, req, res, next) => {
+  const statusCode = err.statusCode || 500;
+  const statusMessage = err.message || 'Internal Server Error';
+
+  // Send a JSON response with the error status code and message
+  res.status(statusCode).json({
+    success: false,
+    message: {
+      statusCode,
+      statusMessage,
+    },
+  });
+});
