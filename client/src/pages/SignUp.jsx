@@ -49,17 +49,14 @@ const SignUp = () => { // Defining the SignUp functional component
           />
         </div>
         <Button gradientDuoTone='purpleToPink' type="submit">
-          // Sign Up
           Sign Up
         </Button>
       </form>
       <div className="flex gap-2 text-sm mt-5">
         <span>
-          // Have an account?
           Have an account?
         </span>
         <Link to="/sign-in" className="text-blue-500">
-          // Sign In
           Sign In
         </Link>
       </div>
